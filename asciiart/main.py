@@ -13,11 +13,18 @@ for i in range(65):
     aDict[i] = asciiValues[i]
 
 im = Image.open("example.jpg")
+def resizeImage (image, new_width=100):
+    width,height = image.size
+    ratio = height/width
+    new_height = int(new_width * ratio)
+    resized_img = image.resize((new_width,new_height))
+    return(resized_img)
+im = resizeImage(im)
 s1 = im.size[0]//2
 s2 = im.size[1]//2
 print(im.size)
 print(s1,s2)
-im1 = im.thumbnail((s1,s2))
+
 print("loaded Image")
 print("Image size:",im.size)
 imageList2 = list(im.getdata())
