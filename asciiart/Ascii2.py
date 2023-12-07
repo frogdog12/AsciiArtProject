@@ -7,7 +7,7 @@ for i in range(65):
     aDict[i] = asciiValues[i]
 
 
-def resizeImage (image, new_width=250):
+def resizeImage (image, new_width=50):
     width,height = image.size
     ratio = height/width
     new_height = int(new_width * ratio)
