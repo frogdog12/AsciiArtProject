@@ -59,9 +59,13 @@ def print_ascii(alist):
                 println += alist[i][j]
         print(println)
 
-ImList = image_pixels_list(im)
-AsciiList = image_list_convert_to_ascii(ImList)
-imagearray = create_2d_array(AsciiList,im)
+def cornSeed(im):
+    ImList = image_pixels_list(im)
+    AsciiList = image_list_convert_to_ascii(ImList)
+    imagearray = create_2d_array(AsciiList, im)
+    return imagearray
+
+imagearray = cornSeed(im)
 print_ascii(imagearray)
 
 
