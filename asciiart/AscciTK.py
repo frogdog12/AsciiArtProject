@@ -1,6 +1,10 @@
 from PIL import Image
 
+
+#Selects image to use
 im = Image.open("zebra.jpg")
+
+#generate a dict of ascii to use to assign to each pixel
 asciiValues = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 aDict = {}
 for i in range(65):
@@ -8,6 +12,7 @@ for i in range(65):
 
 
 def resizeImage (image, new_width=50):
+    #Take in an image, and resizes image to set width, while maintaining aspect ratio
     width,height = image.size
     ratio = height/width
     new_height = int(new_width * ratio)
@@ -33,6 +38,7 @@ def image_list_convert_to_ascii(avglist):
     return avglist
 
 def create_2d_array(ascii_list,image):
+    #creates a 2d array, with dimensions based on size of original image
     imageDim = image.size
     imgArray = [["" for i in range(imageDim[0])] for j in range(imageDim[1])]
     counter = 0
@@ -45,6 +51,7 @@ def create_2d_array(ascii_list,image):
     return imgArray
 
 def print_ascii(alist):
+    #prints ascii using the 2d array given
     for i in range(len(alist)):
         println = ''
         for j in range(len(alist[i])):
@@ -52,15 +59,14 @@ def print_ascii(alist):
                 println += alist[i][j]
         print(println)
 
-im = resizeImage(im)
-ImList = image_pixels_list(im)
-AsciiList = image_list_convert_to_ascii(ImList)
-print(im.size)
-imagearray = create_2d_array(AsciiList,im)
-print('len',len(imagearray))
+def cornSeed(im):
+    ImList = image_pixels_list(im)
+    AsciiList = image_list_convert_to_ascii(ImList)
+    imagearray = create_2d_array(AsciiList, im)
+    return imagearray
+
+imagearray = cornSeed(im)
 print_ascii(imagearray)
 
-testor = ''
-for i in range (300):
-    testor += 'x'
-print(testor)
+
+
