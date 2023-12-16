@@ -51,27 +51,38 @@ def create_2d_array(ascii_list,image):
 
     return imgArray
 
-def print_ascii(alist):
-    #prints ascii using the 2d array given
+# def print_ascii(alist):
+#     #prints ascii using the 2d array given
+#     for i in range(len(alist)):
+#         println = ''
+#         for j in range(len(alist[i])):
+#             for k in range(3):
+#                 println += alist[i][j]
+#         print(println)
+
+def list_to_string(alist):
+    output = ''
     for i in range(len(alist)):
-        println = ''
         for j in range(len(alist[i])):
-            for k in range(3):
-                println += alist[i][j]
-        print(println)
+            for k in range(2):
+                output += alist[i][j]
+        output+=('\n')
+    return output
+
 
 def cornSeed(im):
-    im = resizeImage(im,100)
+    im = resizeImage(im,200)
     ImList = image_pixels_list(im)
     AsciiList = image_list_convert_to_ascii(ImList)
     imagearray = create_2d_array(AsciiList, im)
-    return imagearray
+    imagestr = list_to_string(imagearray)
+    return imagestr
 
 
 
 
 root = Tk()
-root.minsize(300,500)
+root.minsize(500,600)
 frame = Frame(root)
 input_Frame = tkinter.Frame(frame)
 frame.place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -112,9 +123,10 @@ def submit():
     width = w_size.get()
     clear_screen()
     im = cornSeed(Image.open(a_label.cget("text")))
-    print(im)
-    a_label.config(text=im,font=('arial',5))
+    a_label.config(text=im)
     a_label.grid(row=0,column=0)
+    # ascii_text.insert(INSERT,im)
+    # ascii_text.grid(row=0,column=0)
 
 
 def clear_screen():
@@ -126,6 +138,7 @@ def clear_screen():
             #height_label.grid_remove()
             width_entry.grid_remove()
             #height_entry.grid_remove()
+            go_btn.grid_remove()
         else:
             image_label.grid()
             open_button.grid()
@@ -133,9 +146,15 @@ def clear_screen():
             #height_label.grid()
             width_entry.grid()
             #height_entry.grid()
+            go_btn.grid()
 
 #ASCII test label?
-a_label = tkinter.Label(frame,text='')
+# a_label = tkinter.Label(frame,text='',font=("TkFixedFont ",6),justify=LEFT,)
+
+a_label = tkinter.Label(frame,justify=LEFT, text='',font=('courier',2))
+
+#ascii text trial
+ascii_text = tkinter.Text(font=("TkFixedFont",4),height=500,width=500)
 
 # button for opening image
 open_button = tkinter.Button(frame, text="open image", command=open_image, height=1, width=20)
